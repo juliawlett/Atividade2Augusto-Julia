@@ -1,4 +1,4 @@
-let tabela = document.querySelector('#tabela-pacientes')
+let tabela = document.querySelector('.info-delete')
 
 tabela.addEventListener('dblclick', function (evento){
     evento.target.parentNode.classList.add('fadeOut')

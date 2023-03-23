@@ -1,56 +1,54 @@
-let botaoAdicionar = document.querySelector('#adicionar-paciente')
-//Adicionando evento ao botao click
-botaoAdicionar.addEventListener('click', function(evento){
-    //  Impede a natureza padrao do elemento
+let botaoAdicionar = document.querySelector('#adicionar-tarefa')
+//adicionando evento ao botão click
+botaoAdicionar.addEventListener('click', function (evento){
+    //impede a natureza padrão do elemento
     evento.preventDefault()
 
     let form = document.querySelector('#form-adiciona')
 
-    let paciente = obtemPacienteDoForm(form)
+    let tarefa = obtemTarefaDoForm(form)
 
-    adicionaPacienteNaTabela(paciente)
+    adicionaTarefaNaTabela(tarefa)
 
     form.reset()
-
 })
 
 
-//Montando objeto paciente
-function obtemPacienteDoForm(form){
-    let paciente = {
-        nome: form.nome.value,
-        peso: form.peso.value,
-        altura: form.altura.value,
-        gordura: form.gordura.value,
-        imc: calculaImc(form.peso.value, form.altura.value)
+function obtemTarefaDoForm(form){
+    let tarefa = {
+        responsalvel: form.nome.value,
+        status: form.status.value,
+        descricao: form.descricao.value,
+        criado_em: form.criada_em.value,
+        previsao_em: form.previsao_em.value,
+        info_delete: 'Deletar'
+        
+        
     }
 
-    return paciente
+    return tarefa
 }
 
-
-function adicionaPacienteNaTabela(paciente){
-    let pacienteTr = montarTr(paciente)
-    let tabela = document.querySelector('#tabela-pacientes')
-
-    tabela.appendChild(pacienteTr)
+function adicionaTarefaNaTabela(tarefa){
+    let tarefaTr = montarTr(tarefa)
+    let tabela = document.querySelector('#tabela-devs')
+    tabela.appendChild(tarefaTr)
 }
 
-function montarTr(paciente){
+function montarTr(tarefa){
+    //createElemete cria um novo elemento de html
+    let tarefaTr = document.createElement('tr')
+    tarefaTr.classList.add('tarefa')
 
-    //createElement cria um novo elemento de HTML
-    let pacienteTr = document.createElement('tr')
-    pacienteTr.classList.add('paciente')
+//     //Fazendo filhos de elemntos html
+    tarefaTr.appendChild(montarTd(tarefa.responsalvel, "info-responsavel"))
+    tarefaTr.appendChild(montarTd(tarefa.status, "info-status"))
+    tarefaTr.appendChild(montarTd(tarefa.descricao, "info-descricao"))
+    tarefaTr.appendChild(montarTd(tarefa.criado_em, "info-inicio"))
+    tarefaTr.appendChild(montarTd(tarefa.previsao_em, "info-previsao"))
+    tarefaTr.appendChild(montarTd(tarefa.info_delete, "info-delete"))
 
-    pacienteTr.appendChild(montarTd(paciente.nome, "info-nome"))
-    pacienteTr.appendChild(montarTd(paciente.peso, "info-peso"))
-    pacienteTr.appendChild(montarTd(paciente.altura, "info-altura"))
-    pacienteTr.appendChild(montarTd(paciente.gordura, "info-gordura"))
-    pacienteTr.appendChild(montarTd(paciente.imc, "info-imc"))
-
-
-    return pacienteTr
-
+    return tarefaTr
 }
 
 function montarTd(dado, classe){
