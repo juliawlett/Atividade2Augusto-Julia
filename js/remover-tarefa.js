@@ -1,10 +1,12 @@
-let tabela = document.querySelector('.info-delete')
+let tabela = document.querySelector('#tabela-devs');
 
-tabela.addEventListener('dblclick', function (evento){
-    evento.target.parentNode.classList.add('fadeOut')
+tabela.addEventListener('click', function (evento){
+  if (evento.target.classList.contains('info-delete')) {
+    evento.target.parentNode.classList.add('fadeOut');
 
     setTimeout(function(){
-        evento.target.parentNode.remove()
-    }, 500)
-    
-})
+      evento.target.parentNode.remove();
+    }, 500);
+  }
+});
+
